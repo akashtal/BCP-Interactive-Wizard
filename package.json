@@ -11,6 +11,7 @@
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "seed": "cd server && node seed.js",
     "test-api": "node test-api.js",
+    "test-flow": "node test-full-flow.js",
     "start": "cd server && npm start",
     "start-dev": "./start-dev.sh"
   },

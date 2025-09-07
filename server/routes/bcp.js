@@ -28,17 +28,21 @@ router.get('/:id', async (req, res) => {
 // Create new BCP
 router.post('/', async (req, res) => {
   try {
+    console.log('Creating BCP with data:', req.body);
     const bcp = new BCP(req.body);
     const savedBCP = await bcp.save();
+    console.log('BCP created successfully:', savedBCP._id);
     res.status(201).json(savedBCP);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error creating BCP:', error);
+    res.status(400).json({ message: error.message, details: error.errors });
   }
 });
 
 // Update BCP
 router.put('/:id', async (req, res) => {
   try {
+    console.log('Updating BCP:', req.params.id, 'with data:', req.body);
     const bcp = await BCP.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -49,9 +53,11 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'BCP not found' });
     }
     
+    console.log('BCP updated successfully:', bcp._id);
     res.json(bcp);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error updating BCP:', error);
+    res.status(400).json({ message: error.message, details: error.errors });
   }
 });
 

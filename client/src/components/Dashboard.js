@@ -14,7 +14,7 @@ const Dashboard = () => {
     try {
       setIsLoading(true);
       const response = await getBCPs();
-      setBcps(response.data);
+      setBcps(response);
     } catch (error) {
       setError('Failed to fetch BCPs');
       console.error('Error fetching BCPs:', error);
