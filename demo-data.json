@@ -1,0 +1,97 @@
+{
+  "bcpName": "Payroll System BCP",
+  "businessUnit": "Human Resources",
+  "subBusinessUnit": "Payroll Operations",
+  "service": {
+    "name": "Payroll System",
+    "description": "Monthly payroll processing system that handles salary calculations, tax deductions, and direct deposits for all employees."
+  },
+  "processes": [
+    {
+      "name": "Salary calculation",
+      "sites": ["headquarters", "data-center-primary"],
+      "primaryOwner": {
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com"
+      },
+      "backupOwner": {
+        "name": "Mike Chen",
+        "email": "mike.chen@company.com"
+      }
+    },
+    {
+      "name": "Employee database",
+      "sites": ["data-center-primary", "data-center-backup"],
+      "primaryOwner": {
+        "name": "John Smith",
+        "email": "john.smith@company.com"
+      },
+      "backupOwner": {
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com"
+      }
+    },
+    {
+      "name": "Bank transfer",
+      "sites": ["headquarters"],
+      "primaryOwner": {
+        "name": "David Wilson",
+        "email": "david.wilson@company.com"
+      },
+      "backupOwner": {
+        "name": "Lisa Brown",
+        "email": "lisa.brown@company.com"
+      }
+    }
+  ],
+  "criticality": {
+    "timeframe": "Hours",
+    "value": 24
+  },
+  "headcountRequirements": [
+    {
+      "siteId": "headquarters",
+      "processId": "Salary calculation",
+      "headcount": 3
+    },
+    {
+      "siteId": "data-center-primary",
+      "processId": "Employee database",
+      "headcount": 2
+    }
+  ],
+  "dependencies": [
+    {
+      "type": "IT",
+      "description": "HR Information System (HRIS)"
+    },
+    {
+      "type": "External",
+      "description": "Banking partner for direct deposits"
+    },
+    {
+      "type": "Equipment",
+      "description": "Payroll processing servers"
+    }
+  ],
+  "notifications": [
+    {
+      "name": "HR Management Team",
+      "email": "hr-management@company.com",
+      "type": "group"
+    },
+    {
+      "name": "IT Operations",
+      "email": "it-ops@company.com",
+      "type": "group"
+    },
+    {
+      "name": "Finance Director",
+      "email": "finance.director@company.com",
+      "type": "individual"
+    }
+  ],
+  "risks": "Key risks include: 1) Power outages affecting data centers, 2) Cyber security incidents targeting employee data, 3) Banking partner service disruptions, 4) Key personnel unavailability during critical payroll periods, 5) Regulatory compliance issues with tax authorities.",
+  "status": "completed",
+  "currentStep": 4
+}
