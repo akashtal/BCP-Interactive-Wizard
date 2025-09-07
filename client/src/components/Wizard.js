@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import StepIndicator from './StepIndicator';
 import Step1ServiceCapture from './steps/Step1ServiceCapture';
 import Step2BIA from './steps/Step2BIA';
 import Step3Communication from './steps/Step3Communication';
 import Step4Risk from './steps/Step4Risk';
-import { saveBCP, getBCP } from '../services/api';
+import { saveBCP } from '../services/api';
 
 const Wizard = ({ bcpData, setBcpData, currentStep, setCurrentStep }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,14 +22,15 @@ const Wizard = ({ bcpData, setBcpData, currentStep, setCurrentStep }) => {
     try {
       const updatedData = { ...bcpData, ...stepData, currentStep: currentStep + 1 };
       
+      let response;
       if (bcpId) {
-        await saveBCP(bcpId, updatedData);
+        response = await saveBCP(bcpId, updatedData);
       } else {
-        const response = await saveBCP(null, updatedData);
+        response = await saveBCP(null, updatedData);
         setBcpId(response._id);
       }
       
-      setBcpData(updatedData);
+      setBcpData(response);
       setCurrentStep(currentStep + 1);
     } catch (error) {
       console.error('Error saving step:', error);
@@ -48,12 +49,14 @@ const Wizard = ({ bcpData, setBcpData, currentStep, setCurrentStep }) => {
   const handleSaveDraft = async () => {
     setIsLoading(true);
     try {
+      let response;
       if (bcpId) {
-        await saveBCP(bcpId, { ...bcpData, status: 'draft' });
+        response = await saveBCP(bcpId, { ...bcpData, status: 'draft' });
       } else {
-        const response = await saveBCP(null, { ...bcpData, status: 'draft' });
+        response = await saveBCP(null, { ...bcpData, status: 'draft' });
         setBcpId(response._id);
       }
+      setBcpData(response);
       alert('Draft saved successfully!');
     } catch (error) {
       console.error('Error saving draft:', error);
@@ -66,7 +69,8 @@ const Wizard = ({ bcpData, setBcpData, currentStep, setCurrentStep }) => {
   const handleComplete = async () => {
     setIsLoading(true);
     try {
-      await saveBCP(bcpId, { ...bcpData, status: 'completed' });
+      const response = await saveBCP(bcpId, { ...bcpData, status: 'completed' });
+      setBcpData(response);
       alert('BCP completed successfully!');
       // Redirect to dashboard or show success page
     } catch (error) {

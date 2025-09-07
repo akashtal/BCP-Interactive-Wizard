@@ -10,30 +10,75 @@ const api = axios.create({
 });
 
 // BCP API calls
-export const getBCPs = () => api.get('/bcp');
-export const getBCP = (id) => api.get(`/bcp/${id}`);
-export const createBCP = (data) => api.post('/bcp', data);
-export const updateBCP = (id, data) => api.put(`/bcp/${id}`, data);
-export const saveBCP = (id, data) => {
+export const getBCPs = async () => {
+  const response = await api.get('/bcp');
+  return response.data;
+};
+
+export const getBCP = async (id) => {
+  const response = await api.get(`/bcp/${id}`);
+  return response.data;
+};
+
+export const createBCP = async (data) => {
+  const response = await api.post('/bcp', data);
+  return response.data;
+};
+
+export const updateBCP = async (id, data) => {
+  const response = await api.put(`/bcp/${id}`, data);
+  return response.data;
+};
+
+export const saveBCP = async (id, data) => {
   if (id) {
-    return updateBCP(id, data);
+    return await updateBCP(id, data);
   } else {
-    return createBCP(data);
+    return await createBCP(data);
   }
 };
-export const deleteBCP = (id) => api.delete(`/bcp/${id}`);
+
+export const deleteBCP = async (id) => {
+  const response = await api.delete(`/bcp/${id}`);
+  return response.data;
+};
 
 // Sites API calls
-export const getSites = () => api.get('/sites');
-export const createSite = (data) => api.post('/sites', data);
-export const updateSite = (id, data) => api.put(`/sites/${id}`, data);
+export const getSites = async () => {
+  const response = await api.get('/sites');
+  return response.data;
+};
+
+export const createSite = async (data) => {
+  const response = await api.post('/sites', data);
+  return response.data;
+};
+
+export const updateSite = async (id, data) => {
+  const response = await api.put(`/sites/${id}`, data);
+  return response.data;
+};
 
 // Owners API calls
-export const getOwners = () => api.get('/owners');
-export const searchOwners = (query) => api.get(`/owners/search?q=${query}`);
-export const createOwner = (data) => api.post('/owners', data);
+export const getOwners = async () => {
+  const response = await api.get('/owners');
+  return response.data;
+};
+
+export const searchOwners = async (query) => {
+  const response = await api.get(`/owners/search?q=${query}`);
+  return response.data;
+};
+
+export const createOwner = async (data) => {
+  const response = await api.post('/owners', data);
+  return response.data;
+};
 
 // Health check
-export const healthCheck = () => api.get('/health');
+export const healthCheck = async () => {
+  const response = await api.get('/health');
+  return response.data;
+};
 
 export default api;

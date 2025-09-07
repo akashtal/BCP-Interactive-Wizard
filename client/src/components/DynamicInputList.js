@@ -11,7 +11,12 @@ const DynamicInputList = ({
 
   const handleAddItem = () => {
     if (newItem.trim()) {
-      const newItems = [...items, { name: newItem.trim() }];
+      const newItems = [...items, { 
+        name: newItem.trim(),
+        sites: [],
+        primaryOwner: { name: '', email: '' },
+        backupOwner: { name: '', email: '' }
+      }];
       onChange(newItems);
       setNewItem('');
     }

@@ -24,7 +24,7 @@ const DependencySchema = new mongoose.Schema({
 
 const HeadcountRequirementSchema = new mongoose.Schema({
   siteId: { type: mongoose.Schema.Types.ObjectId, ref: 'Site', required: true },
-  processId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  processId: { type: String, required: true },
   headcount: { type: Number, required: true }
 });
 
